@@ -4,5 +4,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --omit=dev
 COPY . .
+ENV HOME=/app
+RUN mkdir -p /app/tmp && chown -R 10014:10014 /app
+USER 10014
 EXPOSE 8080
 CMD ["npm", "start"]
