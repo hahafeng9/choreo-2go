@@ -5,7 +5,7 @@ COPY package*.json ./
 RUN npm install --omit=dev
 COPY . .
 ENV HOME=/app
-RUN mkdir -p /app/tmp && chown -R 10014:10014 /app
+RUN rm -rf /app/tmp && ln -s /tmp/choreo-tmp /app/tmp && chown -R 10014:10014 /app
 USER 10014
 EXPOSE 8080
-CMD ["npm", "start"]
+CMD ["sh", "-c", "mkdir -p /tmp/choreo-tmp && npm start"]
